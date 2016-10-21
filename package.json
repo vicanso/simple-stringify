@@ -1,6 +1,6 @@
 {
   "name": "simple-stringify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "stringify json on top attr",
   "author": "Tree Xie <vicansocanbico@gmail.com>",
   "repository": {
@@ -17,7 +17,8 @@
     "stringify"
   ],
   "scripts": {
-    "test": "node ./node_modules/.bin/eslint ./index.js && node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./test/*.js --"
+    "test": "node ./node_modules/.bin/eslint ./index.js && node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./test/*.js --",
+    "benchmarks": "node benchmarks/index"
   },
   "license": "MIT",
   "devDependencies": {

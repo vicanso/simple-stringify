@@ -29,4 +29,13 @@ describe('Simple-stringify', () => {
     stringify.divider = ',';
     assert.equal(stringify.json(data), 'no=123,mobile=null,addresss=undefined,disabled=false,name="tree.xie",keywords=[],infos={}');
   });
+
+  it('set isSecret success', () => {
+    stringify.divider = ' ';
+    stringify.isSecret = key => key === 'password';
+    assert.equal(stringify.json({
+      account: 'tree.xie',
+      password: '123456',
+    }), 'account="tree.xie" password=***');
+  });
 });
