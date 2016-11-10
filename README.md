@@ -86,6 +86,33 @@ const data = {
 stringify.json(data);
 ```
 
+### maxLevel
+
+Set stringify max level, default is 1
+
+```js
+const stringify = require('simple-stringify');
+stringify.maxLevel = 2;
+const data = {
+  no: 123,
+  mobile: null,
+  addresss: undefined,
+  disabled: false,
+  name: 'tree.xie',
+  keywords: [
+    'koa',
+    'framework',
+    'albi',
+  ],
+  infos: {
+    url : 'https://github.com/vicanso/albi/issues',
+    email: 'vicansocanbico@gmail.com'
+  },
+};
+// no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[0="koa" 1="framework" 2="albi"] infos={url="https://github.com/vicanso/albi/issues" email="vicansocanbico@gmail.com"}
+stringify.json(data);
+```
+
 ## Benchmarks
 
 ```

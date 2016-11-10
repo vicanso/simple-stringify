@@ -7,7 +7,9 @@ exports.divider = ' ';
 // decide the value should be mask
 exports.isSecret = null;
 
-function stringify(json) {
+exports.maxLevel = 1;
+
+function format(json, level) {
   const arr = [];
   /* eslint guard-for-in:0 no-restricted-syntax:0 */
   for (const k in json) {
@@ -21,7 +23,13 @@ function stringify(json) {
       arr.push(`${k}="${v}"`);
     } else if (util.isObject(v)) {
       if (util.isArray(v)) {
-        arr.push(`${k}=[]`);
+        if (level > 1) {
+          arr.push(`${k}=[${format(v, level - 1)}]`);
+        } else {
+          arr.push(`${k}=[]`);
+        }
+      } else if (level > 1) {
+        arr.push(`${k}={${format(v, level - 1)}}`);
       } else {
         arr.push(`${k}={}`);
       }
@@ -30,6 +38,10 @@ function stringify(json) {
     }
   }
   return arr.join(exports.divider);
+}
+
+function stringify(json) {
+  return format(json, exports.maxLevel);
 }
 
 exports.json = stringify;

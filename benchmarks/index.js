@@ -1,4 +1,5 @@
 const stringify = require('..');
+stringify.maxLevel = 2;
 const util = require('util');
 const data = {
   no: 123,

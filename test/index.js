@@ -38,4 +38,10 @@ describe('Simple-stringify', () => {
       password: '123456',
     }), 'account="tree.xie" password=***');
   });
+
+  it('set max level success', () => {
+    stringify.isSecret = null;
+    stringify.maxLevel = 2;
+    assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[0="koa" 1="framework" 2="albi"] infos={url="https://github.com/vicanso/albi/issues" email="vicansocanbico@gmail.com"}');
+  });
 });
