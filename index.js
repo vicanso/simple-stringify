@@ -9,39 +9,47 @@ exports.isSecret = null;
 
 exports.maxLevel = 1;
 
+function toString(k, v, level) {
+  if (exports.isSecret && exports.isSecret(k)) {
+    return `${k}=***`;
+  }
+  if (util.isString(v)) {
+    return `${k}="${v}"`;
+  }
+  if (util.isObject(v)) {
+    if (util.isArray(v)) {
+      if (level > 1) {
+        /* eslint no-use-before-define:0 */
+        return `${k}=[${format(v, level - 1)}]`;
+      }
+      return `${k}=[]`;
+    }
+    if (level > 1) {
+      /* eslint no-use-before-define:0 */
+      return `${k}={${format(v, level - 1)}}`;
+    }
+    return `${k}={}`;
+  }
+  return `${k}=${v}`;
+}
+
 function format(json, level) {
   const arr = [];
-  /* eslint guard-for-in:0 no-restricted-syntax:0 */
-  for (const k in json) {
-    if (exports.isSecret && exports.isSecret(k)) {
-      /* eslint no-continue:0 */
-      arr.push(`${k}=***`);
-      continue;
+  if (util.isArray(json)) {
+    for (let i = 0, len = json.length; i < len; i += 1) {
+      arr.push(toString(i, json[i], level));
     }
-    const v = json[k];
-    if (util.isString(v)) {
-      arr.push(`${k}="${v}"`);
-    } else if (util.isObject(v)) {
-      if (util.isArray(v)) {
-        if (level > 1) {
-          arr.push(`${k}=[${format(v, level - 1)}]`);
-        } else {
-          arr.push(`${k}=[]`);
-        }
-      } else if (level > 1) {
-        arr.push(`${k}={${format(v, level - 1)}}`);
-      } else {
-        arr.push(`${k}={}`);
-      }
-    } else {
-      arr.push(`${k}=${v}`);
+  } else {
+    /* eslint guard-for-in:0 no-restricted-syntax:0 */
+    for (const k in json) {
+      arr.push(toString(k, json[k], level));
     }
   }
   return arr.join(exports.divider);
 }
 
-function stringify(json) {
-  return format(json, exports.maxLevel);
+function stringify(json, level) {
+  return format(json, level || exports.maxLevel);
 }
 
 exports.json = stringify;

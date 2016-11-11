@@ -64,6 +64,8 @@ stringify.json({
 
 Stringify json data
 
+- `level` format level, default is stringify.maxLevel
+
 ```js
 const stringify = require('simple-stringify');
 const data = {
@@ -84,6 +86,9 @@ const data = {
 };
 // no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[] infos={}
 stringify.json(data);
+
+// no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[0="koa" 1="framework" 2="albi"] infos={url="https://github.com/vicanso/albi/issues" email="vicansocanbico@gmail.com"}
+stringify.json(data, 2);
 ```
 
 ### maxLevel
