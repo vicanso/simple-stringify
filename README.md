@@ -53,7 +53,7 @@ Determine if it is confidential by key. If return true, the value will be ***.
 ```js
 const stringify = require('simple-stringify');
 stringify.isSecret = key => key === 'password';
-// account="tree.xie" password=***
+// account="tree.xie" password="***"
 stringify.json({
   password: '123456',
 });
