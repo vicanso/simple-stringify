@@ -1,4 +1,4 @@
-#simple-stringify
+# simple-stringify
 
 [![Build Status](https://travis-ci.org/vicanso/simple-stringify.svg?branch=master)](https://travis-ci.org/vicanso/simple-stringify)
 [![Coverage Status](https://img.shields.io/coveralls/vicanso/simple-stringify/master.svg?style=flat)](https://coveralls.io/r/vicanso/simple-stringify?branch=master)
