@@ -1,7 +1,5 @@
 'use strict';
 
-const util = require('util');
-
 exports.divider = ' ';
 
 // decide the value should be mask
@@ -9,15 +7,29 @@ exports.isSecret = null;
 
 exports.maxLevel = 1;
 
+function isString(value) {
+  return typeof value === 'string';
+}
+
+function isObject(value) {
+  if (!value) {
+    return false;
+  }
+  return typeof value === 'object';
+}
+
 function toString(k, v, level) {
   if (exports.isSecret && exports.isSecret(k)) {
+    if (isString(v)) {
+      return `${k}="***"`;
+    }
     return `${k}=***`;
   }
-  if (util.isString(v)) {
+  if (isString(v)) {
     return `${k}="${v}"`;
   }
-  if (util.isObject(v)) {
-    if (util.isArray(v)) {
+  if (isObject(v)) {
+    if (Array.isArray(v)) {
       if (level > 1) {
         /* eslint no-use-before-define:0 */
         return `${k}=[${format(v, level - 1)}]`;
@@ -35,7 +47,7 @@ function toString(k, v, level) {
 
 function format(json, level) {
   const arr = [];
-  if (util.isArray(json)) {
+  if (Array.isArray(json)) {
     for (let i = 0, len = json.length; i < len; i += 1) {
       arr.push(toString(i, json[i], level));
     }

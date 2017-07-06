@@ -36,7 +36,7 @@ describe('Simple-stringify', () => {
     assert.equal(stringify.json({
       account: 'tree.xie',
       password: '123456',
-    }), 'account="tree.xie" password=***');
+    }), 'account="tree.xie" password="***"');
   });
 
   it('set max level success', () => {
