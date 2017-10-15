@@ -19,15 +19,18 @@ describe('Simple-stringify', () => {
       url : 'https://github.com/vicanso/albi/issues',
       email: 'vicansocanbico@gmail.com'
     },
+    fn: function() {
+      console.dir('test');
+    },
   };
   
   it('format json success', () => {
-    assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[] infos={}');
+    assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[] infos={} fn=function');
   });
 
   it('set divider success', () => {
     stringify.divider = ',';
-    assert.equal(stringify.json(data), 'no=123,mobile=null,addresss=undefined,disabled=false,name="tree.xie",keywords=[],infos={}');
+    assert.equal(stringify.json(data), 'no=123,mobile=null,addresss=undefined,disabled=false,name="tree.xie",keywords=[],infos={},fn=function');
   });
 
   it('set isSecret success', () => {
@@ -42,6 +45,6 @@ describe('Simple-stringify', () => {
   it('set max level success', () => {
     stringify.isSecret = null;
     stringify.maxLevel = 2;
-    assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[0="koa" 1="framework" 2="albi"] infos={url="https://github.com/vicanso/albi/issues" email="vicansocanbico@gmail.com"}');
+    assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[0="koa" 1="framework" 2="albi"] infos={url="https://github.com/vicanso/albi/issues" email="vicansocanbico@gmail.com"} fn=function');
   });
 });

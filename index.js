@@ -11,6 +11,10 @@ function isString(value) {
   return typeof value === 'string';
 }
 
+function isFunction(value) {
+  return typeof value === 'function';
+}
+
 function isObject(value) {
   if (!value) {
     return false;
@@ -27,6 +31,9 @@ function toString(k, v, level) {
   }
   if (isString(v)) {
     return `${k}="${v}"`;
+  }
+  if (isFunction(v)) {
+    return `${k}=function`;
   }
   if (isObject(v)) {
     if (Array.isArray(v)) {
