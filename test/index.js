@@ -23,6 +23,14 @@ describe('Simple-stringify', () => {
       console.dir('test');
     },
   };
+
+  it('add custom format', () => {
+    stringify.addFormat('myCustomKey', v => `myCustomKey="length(${v.length})"`);
+    assert.equal(stringify.json({
+      myCustomKey: 'abcd',
+    }), 'myCustomKey="length(4)"');
+    stringify.removeFormat('myCustomKey');
+  });
   
   it('format json success', () => {
     assert.equal(stringify.json(data), 'no=123 mobile=null addresss=undefined disabled=false name="tree.xie" keywords=[] infos={} fn=function');

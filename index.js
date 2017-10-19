@@ -1,5 +1,7 @@
 'use strict';
 
+const customFormat = {};
+
 exports.divider = ' ';
 
 // decide the value should be mask
@@ -23,6 +25,9 @@ function isObject(value) {
 }
 
 function toString(k, v, level) {
+  if (customFormat[k]) {
+    return customFormat[k](v);
+  }
   if (exports.isSecret && exports.isSecret(k)) {
     if (isString(v)) {
       return `${k}="***"`;
@@ -71,4 +76,14 @@ function stringify(json, level) {
   return format(json, level || exports.maxLevel);
 }
 
+function addFormat(key, fn) {
+  customFormat[key] = fn;
+}
+
+function removeFormat(key) {
+  delete customFormat[key];
+}
+
 exports.json = stringify;
+exports.addFormat = addFormat;
+exports.removeFormat = removeFormat;
