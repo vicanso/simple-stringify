@@ -46,13 +46,13 @@ function toString(k, v, level) {
         /* eslint no-use-before-define:0 */
         return `${k}=[${format(v, level - 1)}]`;
       }
-      return `${k}=[]`;
+      return `${k}=[]:${v.length}`;
     }
     if (level > 1) {
       /* eslint no-use-before-define:0 */
       return `${k}={${format(v, level - 1)}}`;
     }
-    return `${k}={}`;
+    return `${k}={}:${Object.keys(v).length}`;
   }
   return `${k}=${v}`;
 }
