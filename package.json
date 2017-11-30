@@ -1,6 +1,6 @@
 {
   "name": "simple-stringify",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "stringify json on top attr",
   "author": "Tree Xie <vicansocanbico@gmail.com>",
   "repository": {
